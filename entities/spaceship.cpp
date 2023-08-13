@@ -61,3 +61,17 @@ void Spaceship::update_health(int power){
 int Spaceship::get_health(){
     return this->health;
 }
+
+float Spaceship::getY(){
+    return this->y;
+}
+
+float Spaceship::getX(){
+    return this->x;
+}
+
+void Spaceship::set_position(float x, float y){
+    this->x = x;
+    this->y = y;
+    this->sprite.setPosition(x, y);
+}

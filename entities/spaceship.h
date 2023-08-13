@@ -22,8 +22,8 @@ private:
     float width;
     
 public:
-    Spaceship(float height, float width, sf::Vector2f speed, sf::Sprite sprite, float x, float y);
-    void set_position();
+    Spaceship(float, float, sf::Vector2f, sf::Sprite, float, float);
+    void set_position(float, float);
     void move_left();
     void move_right();
     sf::FloatRect get_current_position();
