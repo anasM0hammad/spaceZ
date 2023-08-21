@@ -9,17 +9,26 @@
 #include "spaceship.h"
 #include "../utils/constants.h"
 
-Spaceship::Spaceship(float height, float width, sf::Vector2f speed, sf::Sprite sprite, float x, float y){
-    this->height = height;
-    this->width = width;
+Spaceship::Spaceship(sf::Vector2f speed, float x, float y){
     this->speed = speed;
-    this->sprite = sprite;
+    this->x = x;
+    this->y = y;
+    this->health = START_SPACESHIP_HEALTH;
+    this->bullet_power = START_SPACESHIP_BULLET_POWER;
+    this->texture.loadFromFile(ASSETSPATH + "spaceship.png");
+    this->sprite.setTexture(this->texture);
+    this->sprite.setScale(0.15, 0.15);
+    this->sprite.setPosition(this->x, this->y);
+    this->height = this->texture.getSize().y * 0.15;
+    this->width = this->texture.getSize().x * 0.15;
+}
+
+void Spaceship::reset(float x, float y){
     this->x = x;
     this->y = y;
     this->health = START_SPACESHIP_HEALTH;
     this->bullet_power = START_SPACESHIP_BULLET_POWER;
     sprite.setPosition(this->x, this->y);
-    
 }
 
 void Spaceship::move_left(){
@@ -74,4 +83,8 @@ void Spaceship::set_position(float x, float y){
     this->x = x;
     this->y = y;
     this->sprite.setPosition(x, y);
+}
+
+void Spaceship::draw(sf::RenderWindow& window){
+    window.draw(this->sprite);
 }
