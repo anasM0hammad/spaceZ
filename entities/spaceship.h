@@ -12,7 +12,6 @@
 
 class Spaceship {
 private:
-    sf::Vector2f speed;
     int health;
     int bullet_power;
     float x;
@@ -23,11 +22,11 @@ private:
     sf::Texture texture;
     
 public:
-    Spaceship(sf::Vector2f, float, float);
+    Spaceship(float, float);
     void reset(float, float);
     void set_position(float, float);
-    void move_left();
-    void move_right();
+//    void move_left();
+//    void move_right();
     sf::FloatRect get_current_position();
     float get_centerX();
     void update_health(int);

@@ -10,14 +10,25 @@
 #include "../utils/constants.h"
 #include "../entities/bullet.h"
 
-Bullet::Bullet(sf::Vector2f speed, int power, float x, float y, sf::Sprite sprite, Direction direction){
+Bullet::Bullet(sf::Vector2f speed, int power, float x, float y, Direction direction){
+    float scale = 0.0;
     this->x = x;
     this->y = y;
     this->power = power;
     this->speed = speed;
-    this->width = BULLET_WIDTH;
-    this->height = BULLET_HEIGHT;
-    this->sprite = sprite;
+    if(direction == Direction::DOWN){
+        this->texture.loadFromFile(ASSETSPATH + "laser-enemy.png");
+        scale = 0.15;
+    }
+    else if(direction == Direction::UP){
+        this->texture.loadFromFile(ASSETSPATH + "laser-spaceship.png");
+        scale = 0.25;
+    }
+    this->sprite.setTexture(this->texture);
+    this->sprite.setScale(scale, scale);
+    this->sprite.setPosition(this->x, this->y);
+    this->width = this->texture.getSize().x * scale;
+    this->height = this->texture.getSize().y * scale;
     this->direction = direction;
 }
 
@@ -51,4 +62,8 @@ float Bullet::getX(){
 
 float Bullet::getY(){
     return this->y;
+}
+
+void Bullet::draw(sf::RenderWindow& window){
+    window.draw(this->sprite);
 }

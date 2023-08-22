@@ -14,8 +14,8 @@ HealthKit::HealthKit(float x, float y, sf::Sprite sprite, sf::Vector2f speed, in
     this->x = x;
     this->y = y;
     this->sprite = sprite;
-    this->width = HEALTHKIT_WIDTH;
-    this->height = HEALTHKIT_HEIGHT;
+//    this->width = HEALTHKIT_WIDTH;
+//    this->height = HEALTHKIT_HEIGHT;
     this->speed = speed;
     this->healthBoost = healthBoost;
 }

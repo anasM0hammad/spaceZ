@@ -14,6 +14,7 @@
 class Bullet{
 private:
     sf::Sprite sprite;
+    sf::Texture texture;
     float width;
     float height;
     sf::Vector2f speed;
@@ -23,11 +24,12 @@ private:
     Direction direction;
     
 public:
-    Bullet(sf::Vector2f, int, float, float, sf::Sprite, Direction);
+    Bullet(sf::Vector2f, int, float, float, Direction);
     void update();
     sf::FloatRect get_position();
     float getX();
     float getY();
+    void draw(sf::RenderWindow&);
 };
 
 #endif /* bullet_h */

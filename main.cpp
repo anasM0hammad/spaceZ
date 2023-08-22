@@ -3,6 +3,7 @@
 
 #include "utils/constants.h"
 #include "entities/spaceship.h"
+#include "entities/bullet.h"
 
 // Here is a small helper for you! Have a look.
 #include "ResourcePath.hpp"
@@ -14,8 +15,11 @@ int main(int, char const**)
     int score = 0;
     
     // Spaceship Initialization
-    sf::Vector2f spaceshipSpeed = {20.0, 0};
-    Spaceship *spaceship = new Spaceship(spaceshipSpeed, (WINDOW_WIDTH - 300) / 2, WINDOW_HEIGHT - 250);
+    Spaceship *spaceship = new Spaceship((WINDOW_WIDTH - 300) / 2, WINDOW_HEIGHT - 250);
+    
+    Bullet *bullet = new Bullet({0, SPACESHIP_BULLET_SPEED}, SPACESHIP_POWER, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, Direction::UP);
+    
+    Bullet *enemyBullet = new Bullet({0, 0.1}, 1, WINDOW_WIDTH/3, WINDOW_HEIGHT/3, Direction::DOWN);
     
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SpaceZ");
@@ -119,14 +123,11 @@ int main(int, char const**)
                     else if(event.key.code == sf::Keyboard::P){
                         state = GameState::PAUSED;
                     }
-                    
-                    else if(event.key.code == sf::Keyboard::Left){
-                        spaceship->move_left();
-                    }
-                    
-                    else if(event.key.code == sf::Keyboard::Right){
-                        spaceship->move_right();
-                    }
+                }
+                
+                if(event.type == sf::Event::MouseMoved){
+                    sf::Vector2i mouseCoordinates = sf::Mouse::getPosition(window);
+                    spaceship->set_position(mouseCoordinates.x, spaceship->getY());
                 }
             }
             
@@ -134,6 +135,8 @@ int main(int, char const**)
             window.draw(background);
             window.draw(scoreText);
             spaceship->draw(window);
+            bullet->draw(window);
+            enemyBullet->draw(window);
             window.display();
         }
         

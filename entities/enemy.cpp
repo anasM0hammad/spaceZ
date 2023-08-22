@@ -14,8 +14,8 @@ Enemy::Enemy(float x, float y, sf::Sprite sprite, BuildType build_type, sf::Vect
     this->y = y;
     this->sprite = sprite;
     this->build_type = build_type;
-    this->height = ENEMY_HEIGHT;
-    this->width = ENEMY_WIDTH;
+//    this->height = ENEMY_HEIGHT;
+//    this->width = ENEMY_WIDTH;
     this->speed = speed;
     
     switch(this->build_type){

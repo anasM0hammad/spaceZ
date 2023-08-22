@@ -9,8 +9,7 @@
 #include "spaceship.h"
 #include "../utils/constants.h"
 
-Spaceship::Spaceship(sf::Vector2f speed, float x, float y){
-    this->speed = speed;
+Spaceship::Spaceship(float x, float y){
     this->x = x;
     this->y = y;
     this->health = START_SPACESHIP_HEALTH;
@@ -31,28 +30,28 @@ void Spaceship::reset(float x, float y){
     sprite.setPosition(this->x, this->y);
 }
 
-void Spaceship::move_left(){
-    if(this->x - this->speed.x <= 0){
-        this->x = 0;
-    }
-    else{
-        this->x = this->x - this->speed.x;
-    }
-    this->sprite.setPosition(this->x, this->y);
-    return;
-}
-
-void Spaceship::move_right(){
-    float cornerX = this->x + this->width;
-    if(cornerX + this->speed.x >= WINDOW_WIDTH){
-        this->x = WINDOW_WIDTH - this->width;
-    }
-    else{
-        this->x = this->x + this->speed.x;
-    }
-    this->sprite.setPosition(this->x, this->y);
-    return;
-}
+//void Spaceship::move_left(){
+//    if(this->x - this->speed.x <= 0){
+//        this->x = 0;
+//    }
+//    else{
+//        this->x = this->x - this->speed.x;
+//    }
+//    this->sprite.setPosition(this->x, this->y);
+//    return;
+//}
+//
+//void Spaceship::move_right(){
+//    float cornerX = this->x + this->width;
+//    if(cornerX + this->speed.x >= WINDOW_WIDTH){
+//        this->x = WINDOW_WIDTH - this->width;
+//    }
+//    else{
+//        this->x = this->x + this->speed.x;
+//    }
+//    this->sprite.setPosition(this->x, this->y);
+//    return;
+//}
 
 sf::FloatRect Spaceship::get_current_position(){
     return this->sprite.getLocalBounds();
@@ -80,7 +79,9 @@ float Spaceship::getX(){
 }
 
 void Spaceship::set_position(float x, float y){
-    this->x = x;
+    if(x >= 0 && (x + this->width) <= WINDOW_WIDTH){
+        this->x = x;
+    }
     this->y = y;
     this->sprite.setPosition(x, y);
 }
