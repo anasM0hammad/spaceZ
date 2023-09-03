@@ -10,6 +10,7 @@
 #define bullet_h
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class Bullet{
 private:
@@ -30,6 +31,7 @@ public:
     float getX();
     float getY();
     void draw(sf::RenderWindow&);
+    int getPower();
 };
 
 #endif /* bullet_h */

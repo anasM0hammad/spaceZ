@@ -23,6 +23,7 @@ Bullet::Bullet(sf::Vector2f speed, int power, float x, float y, Direction direct
     else if(direction == Direction::UP){
         this->texture.loadFromFile(ASSETSPATH + "laser-spaceship.png");
         scale = 0.25;
+        this->y -= this->texture.getSize().y * scale;
     }
     this->sprite.setTexture(this->texture);
     this->sprite.setScale(scale, scale);
@@ -53,7 +54,7 @@ void Bullet::update(){
 }
 
 sf::FloatRect Bullet::get_position(){
-    return this->sprite.getLocalBounds();
+    return this->sprite.getGlobalBounds();
 }
 
 float Bullet::getX(){
@@ -66,4 +67,8 @@ float Bullet::getY(){
 
 void Bullet::draw(sf::RenderWindow& window){
     window.draw(this->sprite);
+}
+
+int Bullet::getPower(){
+    return this->power;
 }

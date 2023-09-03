@@ -9,11 +9,16 @@
 #ifndef enemy_h
 #define enemy_h
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "../utils/constants.h"
+#include "blast.h"
 
 class Enemy{
 private:
+    sf::Texture texture;
     sf::Sprite sprite;
+    sf::Texture blastT;
+    sf::Sprite blastS;
     float height;
     float width;
     sf::Vector2f speed;
@@ -22,15 +27,24 @@ private:
     int health;
     float x;
     float y;
+    bool alive;
+    Blast *blast;
+    bool isBlast;
+    int blastCount;
+    sf::Music blastMusic;
     
 public:
-    Enemy(float, float, sf::Sprite, BuildType, sf::Vector2f);
+    Enemy(float, float, BuildType);
     void update();
     void update_health(int);
     int get_health();
     sf::FloatRect get_current_position();
     float getX();
     float getY();
+    void draw(sf::RenderWindow&);
+    void drawBlast(sf::RenderWindow&);
+    void killed();
+    bool isAlive();
 };
 
 #endif /* enemy_h */

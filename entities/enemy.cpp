@@ -9,14 +9,23 @@
 #include <stdio.h>
 #include "enemy.h"
 
-Enemy::Enemy(float x, float y, sf::Sprite sprite, BuildType build_type, sf::Vector2f speed){
+Enemy::Enemy(float x, float y, BuildType build_type){
     this->x = x;
     this->y = y;
-    this->sprite = sprite;
     this->build_type = build_type;
-//    this->height = ENEMY_HEIGHT;
-//    this->width = ENEMY_WIDTH;
-    this->speed = speed;
+    this->texture.loadFromFile(ASSETSPATH + "enemy.png");
+    this->blastT.loadFromFile(ASSETSPATH + "blast.png");
+    this->sprite.setTexture(this->texture);
+    this->blastS.setTexture(this->blastT);
+    this->sprite.setScale(0.2, 0.2);
+    this->blastS.setScale(0.5, 0.5);
+    this->sprite.setPosition(x, y);
+    this->height = this->texture.getSize().y * 0.2;
+    this->width = this->texture.getSize().x * 0.2;
+    this->speed = {0, ENEMY_SPEED};
+    this->alive = true;
+    this->blastCount = 0;
+    this->blastMusic.openFromFile(ASSETSPATH + "blast.ogg");
     
     switch(this->build_type){
         case BuildType::BEGINNER:
@@ -35,7 +44,7 @@ Enemy::Enemy(float x, float y, sf::Sprite sprite, BuildType build_type, sf::Vect
 }
 
 void Enemy::update(){
-    if(this->y < WINDOW_HEIGHT){
+    if(this->y < WINDOW_HEIGHT && !blastCount){
         this->y += this->speed.y;
     }
     this->sprite.setPosition(this->x, this->y);
@@ -50,7 +59,7 @@ int Enemy::get_health(){
 }
 
 sf::FloatRect Enemy::get_current_position(){
-    return this->sprite.getLocalBounds();
+    return this->sprite.getGlobalBounds();
 }
 
 float Enemy::getX(){
@@ -60,3 +69,27 @@ float Enemy::getX(){
 float Enemy::getY(){
     return this->y;
 }
+
+void Enemy::draw(sf::RenderWindow& window){
+    window.draw(this->sprite);
+}
+
+void Enemy::drawBlast(sf::RenderWindow& window){
+    if(!this->isAlive() && this->blastCount < 700){
+        this->blastCount++;
+        this->blastS.setPosition(this->x, this->y);
+        window.draw(this->blastS);
+        if(this->blastCount == 1){
+            this->blastMusic.play();
+        }
+    }
+}
+
+void Enemy::killed(){
+    this->alive = false;
+}
+
+bool Enemy::isAlive(){
+    return this->alive;
+}
+

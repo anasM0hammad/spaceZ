@@ -15,21 +15,24 @@ static constexpr int WINDOW_HEIGHT = 900;
 static constexpr int START_SPACESHIP_HEALTH = 100;
 static constexpr int START_SPACESHIP_BULLET_POWER = 1;
 
-static constexpr float SPACESHIP_BULLET_SPEED = 5.0;
+static constexpr float SPACESHIP_BULLET_SPEED = 0.20;
 static constexpr int SPACESHIP_POWER = 1;
+
+static constexpr float ENEMY_SPEED = 0.08;
 
 static constexpr int BEGINNER_ENEMY_BULLET_POWER = 1;
 static constexpr int INTERMEDIATE_ENEMY_BULLET_POWER = 2;
 static constexpr int EXPERT_ENEMY_BULLET_POWER = 3;
 
-static constexpr int BEGINNER_ENEMY_HEALTH = 50;
-static constexpr int INTERMEDIATE_ENEMY_HEALTH = 100;
-static constexpr int EXPERT_ENEMY_HEALTH = 150;
+static constexpr int BEGINNER_ENEMY_HEALTH = 5;
+static constexpr int INTERMEDIATE_ENEMY_HEALTH = 10;
+static constexpr int EXPERT_ENEMY_HEALTH = 20;
 
 static const std::string ASSETSPATH = "/Users/anas/Desktop/Projects/Cpp_Games/spaceZ/spaceZ/assets/";
 
 static const std::string GAME_START_MSG = "Click to Start";
 static const std::string GAME_PAUSED_MSG = "Paused. Click to Resume";
+static const std::string GAME_COMPLETED_STRING = "Game Over. Click to Restart";
 
 enum BuildType {
     BEGINNER,

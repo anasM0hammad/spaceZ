@@ -20,6 +20,7 @@ Spaceship::Spaceship(float x, float y){
     this->sprite.setPosition(this->x, this->y);
     this->height = this->texture.getSize().y * 0.15;
     this->width = this->texture.getSize().x * 0.15;
+    this->alive = true;
 }
 
 void Spaceship::reset(float x, float y){
@@ -54,11 +55,11 @@ void Spaceship::reset(float x, float y){
 //}
 
 sf::FloatRect Spaceship::get_current_position(){
-    return this->sprite.getLocalBounds();
+    return this->sprite.getGlobalBounds();
 }
 
 float Spaceship::get_centerX(){
-    float centerX = (this->x + this->width) / 2.0;
+    float centerX = this->x + (this->width / 2.0) - 25;
     return centerX;
 }
 
@@ -83,9 +84,17 @@ void Spaceship::set_position(float x, float y){
         this->x = x;
     }
     this->y = y;
-    this->sprite.setPosition(x, y);
+    this->sprite.setPosition(this->x, this->y);
 }
 
 void Spaceship::draw(sf::RenderWindow& window){
     window.draw(this->sprite);
+}
+
+bool Spaceship::isAlive(){
+    return this->alive;
+}
+
+void Spaceship::killed(){
+    this->alive = false;
 }

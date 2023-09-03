@@ -20,6 +20,7 @@ private:
     float width;
     sf::Sprite sprite;
     sf::Texture texture;
+    bool alive;
     
 public:
     Spaceship(float, float);
@@ -34,6 +35,8 @@ public:
     float getX();
     float getY();
     void draw(sf::RenderWindow& window);
+    bool isAlive();
+    void killed();
 };
 
 #endif /* spaceship_h */
